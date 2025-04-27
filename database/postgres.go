@@ -8,5 +8,6 @@ import (
 )
 
 func Connect() (*gorm.DB, error) {
+	config.Load()
 	return gorm.Open(postgres.Open(config.StringConnection), &gorm.Config{})
 }
