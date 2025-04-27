@@ -1,7 +1,7 @@
 package database
 
 import (
-	"TrellGo/config"
+	"TrellGo/src/config"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"TrellGo/config"
-	"TrellGo/database"
+	"TrellGo/src/config"
+	"TrellGo/src/database"
 	"fmt"
 	"net/http"
 
