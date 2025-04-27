@@ -3,7 +3,9 @@ package main
 import (
 	"TrellGo/src/config"
 	"TrellGo/src/database"
+	"TrellGo/src/models"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -42,6 +44,17 @@ func setupRouter() *gin.Engine {
 func main() {
 	config.Load()
 	r := setupRouter()
+	db, err := database.Connect()
+	if err != nil {
+		log.Fatalf("Falha ao conectar ao banco de dados: %v", err)
+	}
+
+	// Agora use os modelos importados
+	err = db.AutoMigrate(&models.User{}, &models.Project{}, &models.Task{}, &models.Comment{})
+	if err != nil {
+		log.Fatalf("Falha na migração: %v", err)
+	}
+
 	// Listen and Server in 0.0.0.0:8080
 	fmt.Println(config.StringConnection)
 	r.Run(fmt.Sprintf(":%d", config.Port))
